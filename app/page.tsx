@@ -1,14 +1,6 @@
-import { fetchPortfolioData } from "@/lib/portfolio-data";
-import { notFound } from "next/navigation";
+import { portfolioData } from "@/lib/portfolio-data";
 import PortfolioClient from "@/components/PortfolioClient";
 
-export default async function Home() {
-  let data;
-  try {
-    data = await fetchPortfolioData();
-  } catch {
-    notFound();
-  }
-
-  return <PortfolioClient data={data} />;
+export default function Home() {
+  return <PortfolioClient data={portfolioData} />;
 }

@@ -61,26 +61,6 @@ export interface PortfolioData {
   certifications: Certification[];
 }
 
-const GIST_URL = "https://gist.githubusercontent.com/Lart101/41aeaa0be49c6932586f7376ea849ae2/raw/portfolio.json";
+import rawData from "./portfolio.json";
 
-export async function fetchPortfolioData(): Promise<PortfolioData> {
-  const res = await fetch(GIST_URL, {
-    next: { revalidate: 3600 },
-  });
-
-  if (!res.ok) {
-    throw new Error(`Failed to fetch portfolio data: ${res.status}`);
-  }
-
-  const data = await res.json();
-
-  const avatarUrl = "/profile-cut.jpg";
-
-  return {
-    ...data,
-    profile: {
-      ...data.profile,
-      avatar: avatarUrl,
-    },
-  };
-}
+export const portfolioData: PortfolioData = rawData as PortfolioData;

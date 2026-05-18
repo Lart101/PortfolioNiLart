@@ -1,0 +1,77 @@
+{
+  "profile": {
+    "name": "Yeoj Artjohn T. Lacrete",
+    "title": "Software Engineer Intern",
+    "bio": "Deeply interested in building accessible digital tools that help people. Always learning, always building.",
+    "avatar": "/profile-cut.jpg"
+  },
+  "contact": {
+    "location": "Malabon City",
+    "phone": "(+63) 9456194590",
+    "email": "yeojlacrete@gmail.com"
+  },
+  "social": {
+    "github": "Lart101",
+    "email": "yeojlacrete@gmail.com"
+  },
+  "experience": [
+    {
+      "company": "Digima Web Solutions",
+      "role": "Software Engineer Intern",
+      "period": "Dec 2025 — Mar 2026",
+      "highlights": [
+        "Improved frontend design and UI for an integrated web app using Angular and Laravel.",
+        "Navigated Frappe/ERPNext business flows like Procure-to-Pay and assisted with custom applications.",
+        "Built custom print formats with HTML, CSS, and Jinja, and supported deployment of website modules and customer portals.",
+        "Completed a 480-hour internship with pair programming and practical development tasks."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Signademy",
+      "description": "Web platform for inclusive education with webcam gesture detection. Awarded Student's Choice Award for IT Capstone (2025-2026).",
+      "tech": ["React", "MediaPipe"],
+      "type": "Capstone",
+      "role": "Lead Developer"
+    },
+    {
+      "name": "Epilogue Vault",
+      "description": "AI reading companion with EPUB/PDF-to-podcast generation, built with Next.js 15, Supabase, and Groq LLM.",
+      "tech": ["Next.js", "Supabase"],
+      "type": "Solo",
+      "role": "Lead Developer"
+    }
+  ],
+  "skills": [
+    {
+      "category": "Web & UI Development",
+      "items": ["HTML", "CSS", "JavaScript", "TypeScript", "Angular", "React.js", "Node.js", "PHP"]
+    },
+    {
+      "category": "Programming & Data",
+      "items": ["Python", "C++", "Pandas", "NumPy"]
+    },
+    {
+      "category": "Databases & Backend",
+      "items": ["SQL", "Supabase", "Firebase"]
+    },
+    {
+      "category": "Tools & Version Control",
+      "items": ["Git", "GitHub"]
+    }
+  ],
+  "education": {
+    "school": "University of the East",
+    "campus": "Caloocan Campus",
+    "degree": "BSIT",
+    "field": "Information Technology",
+    "period": "2022 — 2026"
+  },
+  "certifications": [
+    { "name": "AI for Beginners", "provider": "HP LIFE", "year": 2025 },
+    { "name": "Digital Transformation", "provider": "Google", "year": 2025 },
+    { "name": "Cybersecurity", "provider": "Cisco", "year": 2025 },
+    { "name": "Ethical Hacking", "provider": "UE", "year": 2024 }
+  ]
+}

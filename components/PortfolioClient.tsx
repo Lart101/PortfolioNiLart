@@ -23,21 +23,20 @@ function Navbar({ initials }: { initials: string }) {
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
-
-      const sections = navItems.map((item) => item.href.slice(1));
-      const scrollPosition = window.scrollY + 100;
-
-      for (const section of sections.reverse()) {
-        const element = document.getElementById(section);
-        if (element && element.offsetTop <= scrollPosition) {
-          setActiveSection(section);
-          break;
-        }
-      }
     };
 
+    const updateActiveFromHash = () => {
+      const hash = window.location.hash.slice(1) || "about";
+      setActiveSection(hash);
+    };
+
+    updateActiveFromHash();
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("hashchange", updateActiveFromHash);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("hashchange", updateActiveFromHash);
+    };
   }, []);
 
   return (
@@ -70,6 +69,7 @@ function Navbar({ initials }: { initials: string }) {
             <Link
               key={item.href}
               href={item.href}
+              onClick={() => setActiveSection(item.href.slice(1))}
               className={`relative px-2 sm:px-2.5 py-2 sm:py-1.5 text-[11px] sm:text-sm font-sans transition-all duration-300 rounded-md whitespace-nowrap min-h-[44px] flex items-center ${
                 activeSection === item.href.slice(1)
                   ? "text-foreground"
@@ -97,8 +97,8 @@ export default function PortfolioClient({ data }: { data: PortfolioData }) {
   const nameParts = data.profile.name.split(" ");
   const firstName = nameParts[0];
   const restName = nameParts.slice(1).join(" ");
-  const initials = firstName.slice(0, 2).toUpperCase();
-  const initialsFallback = data.profile.name.split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase();
+  const initials = "YL";
+  const initialsFallback = "YL";
 
   return (
     <div className="relative flex min-h-screen flex-col bg-background text-foreground grain-overlay overflow-x-hidden">

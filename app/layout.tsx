@@ -28,6 +28,9 @@ export const metadata: Metadata = {
   title: "Yeoj Artjohn T. Lacrete | Portfolio",
   description:
     "Software engineer and frontend-focused developer crafting clean, accessible interfaces with modern web stacks.",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({

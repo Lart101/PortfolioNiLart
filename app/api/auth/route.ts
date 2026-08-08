@@ -20,6 +20,8 @@ export async function POST(request: Request) {
     });
     
     if (!currentRes.ok) {
+      const errorText = await currentRes.text();
+      console.error('JSONBin Auth Fetch Error:', currentRes.status, errorText);
       return NextResponse.json(
         { error: 'Failed to fetch current data for authentication.' },
         { status: 500 }

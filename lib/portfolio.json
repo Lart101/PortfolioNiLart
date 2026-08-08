@@ -73,9 +73,5 @@
     { "name": "Digital Transformation", "provider": "Google", "year": 2025 },
     { "name": "Cybersecurity", "provider": "Cisco", "year": 2025 },
     { "name": "Ethical Hacking", "provider": "UE", "year": 2024 }
-  ],
-  "admin": {
-    "username": "admin",
-    "password": "adminniyeoj"
-  }
+  ]
 }

@@ -1,25 +1,14 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Playfair_Display, Source_Sans_3 } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const inter = Inter({
+  variable: "--font-sans",
   subsets: ["latin"],
 });
 
 const playfair = Playfair_Display({
-  variable: "--font-playfair",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const sourceSans = Source_Sans_3({
-  variable: "--font-source-sans",
+  variable: "--font-heading",
   subsets: ["latin"],
   display: "swap",
 });
@@ -41,9 +30,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${playfair.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${sourceSans.variable} min-h-full flex flex-col`}>{children}</body>
+      <body suppressHydrationWarning className={`font-sans bg-background text-foreground min-h-full flex flex-col`}>
+        {children}
+      </body>
     </html>
   );
 }

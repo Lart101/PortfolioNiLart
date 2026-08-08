@@ -29,6 +29,8 @@ export interface Project {
   tech: string[];
   type: string;
   role: string;
+  image?: string;
+  url?: string;
 }
 
 export interface Skill {
@@ -64,3 +66,32 @@ export interface PortfolioData {
 import rawData from "./portfolio.json";
 
 export const portfolioData: PortfolioData = rawData as PortfolioData;
+
+export async function getPortfolioData(): Promise<PortfolioData> {
+  const BIN_ID = process.env.JSONBIN_BIN_ID;
+  const API_KEY = process.env.JSONBIN_API_KEY;
+
+  if (!BIN_ID || !API_KEY) {
+    console.log("JSONBin credentials missing, using local data.");
+    return portfolioData;
+  }
+
+  try {
+    const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
+      headers: {
+        'X-Access-Key': API_KEY,
+      },
+      cache: 'no-store',
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch from JSONBin");
+    }
+
+    const data = await res.json();
+    return data.record;
+  } catch (error) {
+    console.error("Error fetching from JSONBin, falling back to local data:", error);
+    return portfolioData;
+  }
+}

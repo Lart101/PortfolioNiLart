@@ -144,9 +144,11 @@ export default function ProjectsDashboard() {
               <CardHeader>
                 <div className="flex justify-between items-start gap-2">
                   <CardTitle className="text-lg font-semibold">{project.name}</CardTitle>
-                  <span className="text-[10px] font-medium uppercase tracking-wider text-[oklch(0.55_0.12_45)] bg-[oklch(0.55_0.12_45_/_0.08)] px-2 py-0.5 rounded shrink-0">
-                    {project.type}
-                  </span>
+                  {project.category && (
+                    <span className="text-[10px] font-medium uppercase tracking-wider text-[oklch(0.55_0.12_45)] bg-[oklch(0.55_0.12_45_/_0.08)] px-2 py-0.5 rounded shrink-0">
+                      {project.category}
+                    </span>
+                  )}
                 </div>
                 <p className="text-xs text-muted-foreground">{project.role}</p>
               </CardHeader>

@@ -8,11 +8,11 @@
   "contact": {
     "location": "Malabon City",
     "phone": "(+63) 9456194590",
-    "email": "yeojlacrete@gmail.com"
+    "email": "yeojlacretework@gmail.com"
   },
   "social": {
     "github": "Lart101",
-    "email": "yeojlacrete@gmail.com"
+    "email": "yeojlacretework@gmail.com"
   },
   "experience": [
     {
@@ -32,15 +32,15 @@
       "name": "Signademy",
       "description": "Web platform for inclusive education with webcam gesture detection. Awarded Student's Choice Award for IT Capstone (2025-2026).",
       "tech": ["React", "MediaPipe"],
-      "type": "Capstone",
-      "role": "Lead Developer"
+      "role": "Lead Developer",
+      "category": "EdTech / Education"
     },
     {
       "name": "Epilogue Vault",
       "description": "AI reading companion with EPUB/PDF-to-podcast generation, built with Next.js 15, Supabase, and Groq LLM.",
       "tech": ["Next.js", "Supabase"],
-      "type": "Solo",
-      "role": "Lead Developer"
+      "role": "Lead Developer",
+      "category": "Productivity & Tools"
     }
   ],
   "skills": [

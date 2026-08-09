@@ -16,6 +16,7 @@ const GithubIcon = ({ className }: { className?: string }) => (
 );
 
 import { SidebarContent } from "@/components/Sidebar";
+import { HireMeButton } from "@/components/HireMeButton";
 
 export default function PortfolioClient({ data }: { data: PortfolioData }) {
   const [activeSection, setActiveSection] = useState("about");
@@ -135,13 +136,7 @@ export default function PortfolioClient({ data }: { data: PortfolioData }) {
               </p>
 
               <div className="flex flex-wrap gap-4 mt-10">
-                <a
-                  href={`mailto:${data.contact.email}`}
-                  className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 bg-primary text-primary-foreground rounded-xl font-medium text-sm hover:bg-primary/90 transition-all shadow-xl shadow-primary/20 hover:-translate-y-0.5"
-                >
-                  <Mail className="w-4 h-4" />
-                  Let&apos;s Talk
-                </a>
+                <HireMeButton size="lg" />
                 <Link
                   href="/projects"
                   className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 bg-card border border-border rounded-xl font-medium text-sm hover:border-primary hover:text-primary transition-all shadow-sm hover:-translate-y-0.5"
@@ -198,8 +193,8 @@ export default function PortfolioClient({ data }: { data: PortfolioData }) {
               <div className="h-px flex-1 bg-gradient-to-r from-border to-transparent" />
             </div>
 
-            <div className="grid gap-6 md:grid-cols-2">
-              {data.projects.slice(0, 2).map((project, index) => (
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {data.projects.slice(0, 3).map((project, index) => (
                 <div key={index} className="animate-fade-up group h-full" style={{ animationDelay: `${index * 100}ms` }}>
                   {project.url ? (
                     <a href={project.url} target="_blank" rel="noopener noreferrer" className="block h-full">
@@ -217,9 +212,11 @@ export default function PortfolioClient({ data }: { data: PortfolioData }) {
                             <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors shrink-0 opacity-0 group-hover:opacity-100" />
                           </div>
                           <div className="flex items-center gap-2 mt-1">
-                            <span className="text-[10px] font-medium uppercase tracking-widest text-primary bg-primary/10 px-2 py-0.5 rounded">
-                              {project.type}
-                            </span>
+                            {project.category && (
+                              <span className="text-[10px] font-medium uppercase tracking-widest text-primary bg-primary/10 px-2 py-0.5 rounded">
+                                {project.category}
+                              </span>
+                            )}
                             <span className="text-xs text-muted-foreground font-medium">• {project.role}</span>
                           </div>
                         </CardHeader>
@@ -251,9 +248,11 @@ export default function PortfolioClient({ data }: { data: PortfolioData }) {
                           </CardTitle>
                         </div>
                         <div className="flex items-center gap-2 mt-1">
-                          <span className="text-[10px] font-medium uppercase tracking-widest text-primary bg-primary/10 px-2 py-0.5 rounded">
-                            {project.type}
-                          </span>
+                          {project.category && (
+                            <span className="text-[10px] font-medium uppercase tracking-widest text-primary bg-primary/10 px-2 py-0.5 rounded">
+                              {project.category}
+                            </span>
+                          )}
                           <span className="text-xs text-muted-foreground font-medium">• {project.role}</span>
                         </div>
                       </CardHeader>

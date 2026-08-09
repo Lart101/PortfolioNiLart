@@ -23,14 +23,22 @@ export interface Experience {
   highlights: string[];
 }
 
+export const PROJECT_CATEGORIES = [
+  "EdTech / Education",
+  "E-Commerce",
+  "Productivity & Tools",
+  "Creative / Media"
+];
+
 export interface Project {
   name: string;
   description: string;
   tech: string[];
-  type: string;
   role: string;
   image?: string;
   url?: string;
+  featured?: boolean;
+  category?: string;
 }
 
 export interface Skill {

@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Project } from "@/lib/portfolio-data";
+import { Project, PROJECT_CATEGORIES } from "@/lib/portfolio-data";
 
 interface ProjectFormDialogProps {
   open: boolean;
@@ -20,7 +20,7 @@ export function ProjectFormDialog({ open, onOpenChange, project, onSubmit }: Pro
     name: "",
     description: "",
     tech: [],
-    type: "",
+    category: "",
     role: "",
   });
   const [techInput, setTechInput] = useState("");
@@ -34,7 +34,7 @@ export function ProjectFormDialog({ open, onOpenChange, project, onSubmit }: Pro
         name: "",
         description: "",
         tech: [],
-        type: "",
+        category: "",
         role: "",
       });
       setTechInput("");
@@ -97,15 +97,19 @@ export function ProjectFormDialog({ open, onOpenChange, project, onSubmit }: Pro
 
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="type">Type</Label>
-              <Input
-                id="type"
-                value={formData.type}
-                onChange={(e) => setFormData({ ...formData, type: e.target.value })}
-                placeholder="e.g. Web App"
+              <Label htmlFor="category">Category</Label>
+              <select
+                id="category"
+                value={formData.category || ""}
+                onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                 required
-                className="bg-card/50"
-              />
+                className="flex h-10 w-full rounded-md border border-input bg-card/50 px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                <option value="" disabled>Select a category</option>
+                {PROJECT_CATEGORIES.map(cat => (
+                  <option key={cat} value={cat}>{cat}</option>
+                ))}
+              </select>
             </div>
             
             <div className="space-y-2">

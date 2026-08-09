@@ -3,6 +3,7 @@ import { Menu, Mail, Briefcase, User, Code, GraduationCap, Phone } from "lucide-
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { PortfolioData } from "@/lib/portfolio-data";
+import { HireMeButton } from "./HireMeButton";
 
 const GithubIcon = ({ className }: { className?: string }) => (
   <svg className={className} fill="currentColor" viewBox="0 0 24 24">
@@ -68,21 +69,24 @@ export function SidebarContent({ data, activeSection, setActiveSection }: { data
         })}
       </nav>
 
-      <div className="mt-auto pt-8 flex items-center justify-center gap-4">
-        <a
-          href={`mailto:${data.contact.email}`}
-          className="p-2.5 rounded-full bg-muted text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-110 shadow-sm"
-        >
-          <Mail className="w-4 h-4" />
-        </a>
-        <a
-          href={`https://github.com/${data.social.github}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="p-2.5 rounded-full bg-muted text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-110 shadow-sm"
-        >
-          <GithubIcon className="w-4 h-4" />
-        </a>
+      <div className="mt-auto pt-4 flex flex-col gap-4">
+        <HireMeButton size="sm" className="w-full" />
+        <div className="flex items-center justify-center gap-4">
+          <a
+            href={`mailto:${data.contact.email}`}
+            className="p-2.5 rounded-full bg-muted text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-110 shadow-sm"
+          >
+            <Mail className="w-4 h-4" />
+          </a>
+          <a
+            href={`https://github.com/${data.social.github}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-2.5 rounded-full bg-muted text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-110 shadow-sm"
+          >
+            <GithubIcon className="w-4 h-4" />
+          </a>
+        </div>
       </div>
     </div>
   );

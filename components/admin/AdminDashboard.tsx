@@ -11,7 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import type { PortfolioData } from "@/lib/portfolio-data";
+import { PROJECT_CATEGORIES, type PortfolioData } from "@/lib/portfolio-data";
 
 const portfolioSchema = z.object({
   profile: z.object({
@@ -42,7 +42,7 @@ const portfolioSchema = z.object({
       name: z.string().min(1, "Required"),
       description: z.string().min(1, "Required"),
       tech: z.array(z.string()),
-      type: z.string().min(1, "Required"),
+      category: z.string().min(1, "Required"),
       role: z.string().min(1, "Required"),
       image: z.string().optional(),
       url: z.string().optional(),
@@ -147,6 +147,24 @@ export function AdminDashboard({ adminPassword, onLogout }: { adminPassword: str
 
   const onSubmit = async (data: FormValues) => {
     setIsSaving(true);
+    
+    // Clean up comma-separated and newline-separated inputs
+    const cleanedData = {
+      ...data,
+      projects: data.projects.map(p => ({
+        ...p,
+        tech: p.tech.map(t => t.trim()).filter(Boolean)
+      })),
+      skills: data.skills.map(s => ({
+        ...s,
+        items: s.items.map(i => i.trim()).filter(Boolean)
+      })),
+      experience: data.experience.map(e => ({
+        ...e,
+        highlights: e.highlights.map(h => h.trim()).filter(Boolean)
+      }))
+    };
+
     try {
       const res = await fetch("/api/portfolio", {
         method: "PUT",
@@ -154,7 +172,7 @@ export function AdminDashboard({ adminPassword, onLogout }: { adminPassword: str
           "Content-Type": "application/json",
           "x-admin-password": adminPassword,
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(cleanedData),
       });
 
       if (res.ok) {
@@ -326,7 +344,7 @@ export function AdminDashboard({ adminPassword, onLogout }: { adminPassword: str
           <TabsContent value="projects" className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
             <div className="flex items-center justify-between pb-2 border-b">
               <h2 className="text-2xl font-semibold tracking-tight">Projects</h2>
-              <Button onClick={() => appendProj({ name: "", description: "", tech: [], type: "", role: "", image: "", url: "" })} variant="default" size="sm">
+              <Button onClick={() => appendProj({ name: "", description: "", tech: [], category: "", role: "", image: "", url: "" })} variant="default" size="sm">
                 <Plus className="w-4 h-4 mr-2" /> Add Project
               </Button>
             </div>
@@ -355,8 +373,16 @@ export function AdminDashboard({ adminPassword, onLogout }: { adminPassword: str
                       <Input {...register(`projects.${index}.name`)} />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-sm font-medium text-muted-foreground">Type (e.g. Web App, Capstone)</label>
-                      <Input {...register(`projects.${index}.type`)} />
+                      <label className="text-sm font-medium text-muted-foreground">Category</label>
+                      <select
+                        {...register(`projects.${index}.category`)}
+                        className="flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                      >
+                        <option value="" disabled>Select a category</option>
+                        {PROJECT_CATEGORIES.map(cat => (
+                          <option key={cat} value={cat}>{cat}</option>
+                        ))}
+                      </select>
                     </div>
                     <div className="space-y-2">
                       <label className="text-sm font-medium text-muted-foreground">Your Role</label>
@@ -369,8 +395,8 @@ export function AdminDashboard({ adminPassword, onLogout }: { adminPassword: str
                         name={`projects.${index}.tech`}
                         render={({ field }) => (
                           <Input 
-                            value={field.value?.join(", ")} 
-                            onChange={(e) => field.onChange(e.target.value.split(",").map(t => t.trim()).filter(Boolean))}
+                            value={field.value?.join(",")} 
+                            onChange={(e) => field.onChange(e.target.value.split(","))}
                             placeholder="React, Next.js, Tailwind"
                           />
                         )}
@@ -453,8 +479,8 @@ export function AdminDashboard({ adminPassword, onLogout }: { adminPassword: str
                         name={`skills.${index}.items`}
                         render={({ field }) => (
                           <Textarea 
-                            value={field.value?.join(", ")} 
-                            onChange={(e) => field.onChange(e.target.value.split(",").map(i => i.trim()).filter(Boolean))}
+                            value={field.value?.join(",")} 
+                            onChange={(e) => field.onChange(e.target.value.split(","))}
                             placeholder="React, Vue, Angular (comma separated)"
                             rows={3}
                             className="resize-none"
